@@ -9,8 +9,10 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "elasticsearch": "^13.1.1",
     "scc-broker-client": "^1.2.2",
     "socketcluster": "^5.15.0",
-    "socketcluster-client": "^5.5.1"
+    "socketcluster-client": "^5.5.1",
+    "winston": "^2.3.1"
   }
 }
