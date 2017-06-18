@@ -1,3 +1,5 @@
+const esClient = require('./libs/elasticsearch');
+
 module.exports.run = function (worker) {
   console.log('   >> Worker PID:', process.pid);
   var scServer = worker.scServer;
@@ -19,6 +21,14 @@ module.exports.run = function (worker) {
       console.log(data);
       socket.emit('simple_event2', 'msg: Server sent simple_event2 data');
       scServer.exchange.publish('channel_2', 'msg: Server sent data to channel_2');
+    });
+
+    // elasticsearch event
+    socket.on('elasticsearch', () => {
+      const esData = esClient.searchDocument('pmd_api', 'set_event', '');
+
+      // Push es data for client
+      socket.emit('elasticsearch', esData.hits.hits);
     });
 
     var interval = setInterval(function () {
